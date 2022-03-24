@@ -9,6 +9,8 @@ import {
   FlatList,
 } from 'react-native'
 
+import GoalItem from './components/GoalItem'
+
 type TState = {
   text: string
   id: string
@@ -16,9 +18,7 @@ type TState = {
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState<string>('')
-  const [courseGoals, setCourseGoals] = useState<TState[] | null>([
-    { text: '', id: '' },
-  ])
+  const [courseGoals, setCourseGoals] = useState<TState[]>([])
 
   const goalInputHandler = (enteredText: string) => {
     setEnteredGoalText(enteredText)
@@ -26,7 +26,7 @@ export default function App() {
 
   const addGoalHandler = () => {
     setCourseGoals((currentCourseGoals) => [
-      ...currentCourseGoals!,
+      ...currentCourseGoals,
       { text: enteredGoalText, id: Math.random().toString() },
     ])
   }
@@ -45,11 +45,7 @@ export default function App() {
         <FlatList
           data={courseGoals}
           renderItem={(itemData) => {
-            return (
-              <View>
-                <Text>{itemData.item.text}</Text>
-              </View>
-            )
+            return <GoalItem text={itemData.item.text} />
           }}
           keyExtractor={(item) => item.id}
           alwaysBounceVertical={false}
@@ -83,14 +79,5 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 5,
-  },
-  goalItem: {
-    margin: 8,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: '#5e0acc',
-  },
-  goalText: {
-    color: 'white',
   },
 })
