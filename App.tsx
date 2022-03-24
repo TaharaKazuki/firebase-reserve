@@ -1,9 +1,24 @@
 import { useState } from 'react'
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+  FlatList,
+} from 'react-native'
+
+type TState = {
+  text: string
+  id: string
+}
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState<string>('')
-  const [courseGoals, setCourseGoals] = useState<string[]>([])
+  const [courseGoals, setCourseGoals] = useState<TState[] | null>([
+    { text: '', id: '' },
+  ])
 
   const goalInputHandler = (enteredText: string) => {
     setEnteredGoalText(enteredText)
@@ -11,8 +26,8 @@ export default function App() {
 
   const addGoalHandler = () => {
     setCourseGoals((currentCourseGoals) => [
-      ...currentCourseGoals,
-      enteredGoalText,
+      ...currentCourseGoals!,
+      { text: enteredGoalText, id: Math.random().toString() },
     ])
   }
 
@@ -27,9 +42,18 @@ export default function App() {
         <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
-        {courseGoals.map((goal, i) => (
-          <Text key={i}>{goal}</Text>
-        ))}
+        <FlatList
+          data={courseGoals}
+          renderItem={(itemData) => {
+            return (
+              <View>
+                <Text>{itemData.item.text}</Text>
+              </View>
+            )
+          }}
+          keyExtractor={(item) => item.id}
+          alwaysBounceVertical={false}
+        />
       </View>
     </View>
   )
@@ -59,5 +83,14 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 5,
+  },
+  goalItem: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: '#5e0acc',
+  },
+  goalText: {
+    color: 'white',
   },
 })
