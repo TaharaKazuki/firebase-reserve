@@ -24,8 +24,6 @@ const GoalInput = ({ visible, onAddGoal, onCancel }: Props) => {
     setEnteredGoalText('')
   }
 
-  console.info('通過')
-
   return (
     <Modal visible={visible} animationType="slide">
       <View style={styles.inputContainer}>
