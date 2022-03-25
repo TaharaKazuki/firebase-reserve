@@ -22,6 +22,7 @@ const GoalInput = ({ onAddGoal }: Props) => {
       <TextInput
         style={styles.textInput}
         placeholder="Your course goal!"
+        value={enteredGoalText}
         onChangeText={goalInputHandler}
       />
       <Button title="Add Goal" onPress={addGoalHandler} />
