@@ -4,8 +4,6 @@ import { LoginCredentials, RegisterCredentials, useLogin, useRegister } from '..
 
 import { Button, Form, Input } from './ui'
 
-import { setUser } from '@/mock/db'
-
 export const AuthScreen = () => {
   const [mode, setMode] = React.useState<'register' | 'login'>('login')
 
@@ -17,12 +15,12 @@ export const AuthScreen = () => {
           <Button onClick={() => setMode('register')}>Register</Button>
         </>
       )}
-      {/* {mode === 'register' && (
+      {mode === 'register' && (
         <>
           <RegisterForm />
           <Button onClick={() => setMode('login')}>Login</Button>
         </>
-      )} */}
+      )}
     </div>
   )
 }
@@ -40,36 +38,36 @@ const useForm = <V extends Record<string, any>>(initialValues?: V) => {
   }
 }
 
-// const RegisterForm = () => {
-//   const register = useRegister()
-//   const { values, onChange } = useForm<RegisterCredentials>()
+const RegisterForm = () => {
+  const register = useRegister()
+  const { values, onChange } = useForm<RegisterCredentials>()
 
-//   return (
-//     <Form
-//       title="Register"
-//       onSubmit={(e) => {
-//         e.preventDefault()
-//         register.mutate(values, {
-//           onSuccess: () => console.log('registered'),
-//         })
-//       }}
-//       error={register.error}
-//     >
-//       <Input
-//         autoComplete="new-password"
-//         placeholder="email"
-//         name="email"
-//         type="email"
-//         onChange={onChange}
-//       />
-//       <Input placeholder="name" name="name" onChange={onChange} />
-//       <Input type="password" placeholder="password" name="password" onChange={onChange} />
-//       <Button disabled={register.isLoading} type="submit">
-//         Submit
-//       </Button>
-//     </Form>
-//   )
-// }
+  return (
+    <Form
+      title="Register"
+      onSubmit={(e) => {
+        e.preventDefault()
+        register.mutate(values, {
+          onSuccess: () => console.log('registered'),
+        })
+      }}
+      error={register.error}
+    >
+      <Input
+        autoComplete="new-password"
+        placeholder="email"
+        name="email"
+        type="email"
+        onChange={onChange}
+      />
+      <Input placeholder="name" name="name" onChange={onChange} />
+      <Input type="password" placeholder="password" name="password" onChange={onChange} />
+      <Button disabled={register.isLoading} type="submit">
+        Submit
+      </Button>
+    </Form>
+  )
+}
 
 const LoginForm = () => {
   const login = useLogin()
