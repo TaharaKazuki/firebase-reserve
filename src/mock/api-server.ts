@@ -50,6 +50,7 @@ const handlers = [
 
   rest.post('/auth/logout', (req, res, ctx) => {
     storage.clearToken()
+    console.info('')
     return res(ctx.delay(1000), ctx.json({ message: 'Logged out' }))
   }),
 ]
