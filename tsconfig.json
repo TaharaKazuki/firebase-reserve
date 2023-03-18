@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
@@ -12,8 +12,7 @@
     "moduleResolution": "Node",
     "noEmit": true,
     "paths": {
-      "@/*": ["src/*"],
-      "test-utils": ["./utils/test-utils"]
+      "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
@@ -21,6 +20,6 @@
     "target": "ESNext",
     "useDefineForClassFields": true
   },
-  "include": ["src", "jest.setup.ts"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

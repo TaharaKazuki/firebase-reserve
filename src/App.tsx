@@ -1,12 +1,5 @@
-import { AppProvider } from './providers';
-import { AppRoutes } from './routes';
-
 const App = () => {
-  return (
-    <AppProvider>
-      <AppRoutes />
-    </AppProvider>
-  );
+  return <h1 className="text-2xl bg-red-200">Hello</h1>;
 };
 
 export default App;
